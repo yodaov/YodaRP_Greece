@@ -1,0 +1,260 @@
+
+/* V18 UI redesign: top command console, cleaner cards, better map visibility */
+
+:root {
+  --ui-bg: rgba(15, 22, 31, 0.88);
+  --ui-bg-strong: rgba(15, 22, 31, 0.96);
+  --ui-border: rgba(255,255,255,0.16);
+  --ui-text: #edf5f8;
+  --ui-muted: #b8c6cf;
+  --ui-accent: #70a7ff;
+}
+
+#ui {
+  position: fixed;
+  left: 50%;
+  top: 10px;
+  transform: translateX(-50%);
+  z-index: 24;
+  width: min(1120px, calc(100vw - 20px));
+  max-height: calc(100vh - 20px);
+  overflow: visible;
+  background: transparent;
+  color: var(--ui-text);
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  pointer-events: none;
+}
+
+#ui .inner {
+  padding: 0;
+  max-height: none;
+  overflow: visible;
+  pointer-events: none;
+}
+
+#ui h1 {
+  font-size: 18px;
+  letter-spacing: 0.03em;
+  margin: 0;
+  white-space: nowrap;
+}
+
+#ui .topBar {
+  pointer-events: auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border);
+  border-radius: 18px;
+  box-shadow: 0 12px 34px rgba(0,0,0,0.28);
+  backdrop-filter: blur(10px);
+}
+
+#ui .topActions,
+#ui .modeActions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#ui .topActions {
+  justify-content: flex-end;
+}
+
+#ui .modeActions {
+  justify-content: center;
+}
+
+#ui button,
+#ui input,
+#ui select {
+  pointer-events: auto;
+}
+
+#ui button {
+  border-radius: 12px;
+  padding: 7px 10px;
+  font-weight: 650;
+}
+
+#ui .toggleBtn.active,
+#ui .menuTabs button.active {
+  background: rgba(112,167,255,0.26);
+  border-color: rgba(112,167,255,0.54);
+  color: #fff;
+}
+
+#ui .menuTabs {
+  pointer-events: auto;
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  padding: 8px 2px 0;
+  margin: 0;
+  scrollbar-width: thin;
+}
+
+#ui .menuTabs button {
+  flex: 0 0 auto;
+  border-radius: 999px;
+  min-width: auto;
+  padding: 8px 12px;
+  background: rgba(18,28,39,0.78);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+#ui .menuPanel {
+  pointer-events: auto;
+  display: none;
+  position: absolute;
+  top: 106px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1040px, calc(100vw - 28px));
+  max-height: calc(100vh - 126px);
+  overflow: auto;
+  padding: 12px;
+  background: var(--ui-bg-strong);
+  border: 1px solid var(--ui-border);
+  border-radius: 18px;
+  box-shadow: 0 18px 48px rgba(0,0,0,0.38);
+  backdrop-filter: blur(12px);
+}
+
+#ui .menuPanel.active {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+  align-content: start;
+  gap: 10px;
+}
+
+#ui .smallPanel {
+  margin: 0;
+  background: rgba(255,255,255,0.055);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 16px;
+  padding: 12px;
+}
+
+#ui .smallPanel h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+#ui #panelGuide.active,
+#ui #panelRoutes.active,
+#ui #panelEmpires.active {
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+}
+
+#ui #panelArmies.active {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+#selectedSettlementInfo:empty,
+#selectedArmyInfo:empty {
+  display: none;
+}
+
+#contextMenu {
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.34);
+  backdrop-filter: blur(10px);
+}
+
+#battlePanel {
+  width: min(920px, calc(100vw - 24px));
+  border-radius: 18px;
+}
+
+#readout {
+  margin: 0;
+  font-size: 12px;
+  color: var(--ui-muted);
+  max-width: 360px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#ui > .inner > .hint {
+  display: none;
+}
+
+.empireColorDot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.75);
+  vertical-align: -1px;
+  margin-right: 6px;
+}
+
+.v18EmptyNotice {
+  color: var(--ui-muted);
+  font-size: 12px;
+  padding: 8px;
+  border: 1px dashed rgba(255,255,255,0.12);
+  border-radius: 12px;
+}
+
+.v18InspectorHint {
+  color: var(--ui-muted);
+  font-size: 12px;
+}
+
+.v18PanelHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 7px;
+  color: #fff;
+  font-weight: 750;
+}
+
+@media (max-width: 760px) {
+  #ui {
+    left: 8px;
+    right: 8px;
+    transform: none;
+    width: auto;
+  }
+  #ui .topBar {
+    grid-template-columns: 1fr;
+  }
+  #ui .modeActions,
+  #ui .topActions {
+    justify-content: flex-start;
+  }
+  #ui .menuPanel {
+    top: 172px;
+    width: calc(100vw - 16px);
+    max-height: calc(100vh - 186px);
+  }
+  #readout {
+    max-width: none;
+  }
+}
+
+canvas {
+  cursor: grab;
+}
+
+canvas:active {
+  cursor: grabbing;
+}
+
+.disabledEventCard {
+  opacity: 0.55;
+  filter: grayscale(0.25);
+}
