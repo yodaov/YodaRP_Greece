@@ -1,0 +1,431 @@
+
+/* V19 professional strategy-game UI override.
+   Top command bar + left icon rail + right drawer panels.
+   Uses !important because older single-panel styles were very specific. */
+
+:root {
+  --yrp-bg: rgba(11, 16, 23, 0.74);
+  --yrp-bg-strong: rgba(16, 23, 32, 0.96);
+  --yrp-bg-card: rgba(255,255,255,0.055);
+  --yrp-border: rgba(255,255,255,0.15);
+  --yrp-border-strong: rgba(136,177,216,0.34);
+  --yrp-text: #eef6fa;
+  --yrp-muted: #aec0cc;
+  --yrp-gold: #d7b66a;
+  --yrp-blue: #79aef2;
+  --yrp-danger: #e06161;
+  --yrp-shadow: 0 18px 48px rgba(0,0,0,0.35);
+}
+
+#ui {
+  position: fixed !important;
+  inset: 0 !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  color: var(--yrp-text) !important;
+  z-index: 24 !important;
+  pointer-events: none !important;
+}
+
+#ui .inner {
+  padding: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  background: transparent !important;
+  pointer-events: none !important;
+}
+
+#ui h1 {
+  margin: 0 !important;
+  color: #fff !important;
+  font-size: 18px !important;
+  letter-spacing: 0.02em !important;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+  white-space: nowrap !important;
+}
+
+#ui > .inner > p:not(#readout),
+#ui > .inner > .hint {
+  display: none !important;
+}
+
+/* TOP COMMAND BAR */
+#ui .topBar {
+  pointer-events: auto !important;
+  position: fixed !important;
+  top: 12px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: min(1120px, calc(100vw - 32px)) !important;
+  min-height: 58px !important;
+  display: grid !important;
+  grid-template-columns: auto 1fr auto auto !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 10px 12px !important;
+  background:
+    linear-gradient(180deg, rgba(36,48,60,0.88), rgba(16,23,32,0.88)),
+    radial-gradient(circle at 20% 0%, rgba(215,182,106,0.14), transparent 50%) !important;
+  border: 1px solid var(--yrp-border-strong) !important;
+  border-radius: 16px !important;
+  box-shadow: var(--yrp-shadow) !important;
+  backdrop-filter: blur(14px) saturate(1.1) !important;
+}
+
+#ui .titleWrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  padding-right: 6px !important;
+  border-right: 1px solid rgba(255,255,255,0.12) !important;
+}
+
+#ui .titleWrap::before {
+  content: "♜";
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  border-radius: 10px;
+  background: linear-gradient(160deg, rgba(215,182,106,0.35), rgba(121,174,242,0.20));
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #ffe5a3;
+  box-shadow: inset 0 0 18px rgba(255,255,255,0.05);
+}
+
+#ui .modeActions,
+#ui .topActions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  flex-wrap: wrap !important;
+}
+
+#ui .modeActions {
+  justify-content: center !important;
+}
+
+#ui .topActions {
+  justify-content: flex-end !important;
+}
+
+#readout {
+  margin: 0 !important;
+  width: min(260px, 22vw) !important;
+  color: var(--yrp-muted) !important;
+  font-size: 12px !important;
+  line-height: 1.25 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  padding-left: 8px !important;
+  border-left: 1px solid rgba(255,255,255,0.12) !important;
+}
+
+/* BUTTONS */
+#ui button,
+#ui input,
+#ui select {
+  pointer-events: auto !important;
+  box-sizing: border-box !important;
+}
+
+#ui button {
+  min-height: 31px !important;
+  padding: 7px 11px !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  background: linear-gradient(180deg, rgba(48,67,84,0.96), rgba(30,42,54,0.96)) !important;
+  color: var(--yrp-text) !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 12px rgba(0,0,0,0.18) !important;
+}
+
+#ui button:hover {
+  border-color: rgba(215,182,106,0.55) !important;
+  background: linear-gradient(180deg, rgba(60,80,99,0.98), rgba(35,50,64,0.98)) !important;
+}
+
+#ui .toggleBtn.active,
+#ui .menuTabs button.active {
+  border-color: rgba(215,182,106,0.68) !important;
+  background: linear-gradient(180deg, rgba(101,84,42,0.72), rgba(55,47,31,0.88)) !important;
+  color: #fff4cc !important;
+}
+
+/* LEFT NAV RAIL */
+#ui .menuTabs {
+  pointer-events: auto !important;
+  position: fixed !important;
+  left: 14px !important;
+  top: 94px !important;
+  width: 116px !important;
+  max-height: calc(100vh - 112px) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  padding: 10px !important;
+  background: linear-gradient(180deg, rgba(20,30,41,0.82), rgba(11,16,23,0.80)) !important;
+  border: 1px solid var(--yrp-border) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 14px 38px rgba(0,0,0,0.30) !important;
+  backdrop-filter: blur(12px) !important;
+  scrollbar-width: thin !important;
+}
+
+#ui .menuTabs::before {
+  content: "COMMAND";
+  color: var(--yrp-gold);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-align: center;
+  margin: 2px 0 3px;
+  opacity: 0.88;
+}
+
+#ui .menuTabs button {
+  width: 100% !important;
+  justify-content: center !important;
+  border-radius: 12px !important;
+  padding: 9px 8px !important;
+  text-align: center !important;
+}
+
+#v19MapOnlyBtn {
+  color: #dcecff !important;
+  border-color: rgba(121,174,242,0.42) !important;
+}
+
+/* RIGHT DRAWER PANELS */
+#ui .menuPanel {
+  pointer-events: auto !important;
+  display: none !important;
+  position: fixed !important;
+  right: 14px !important;
+  top: 94px !important;
+  left: auto !important;
+  transform: none !important;
+  width: min(470px, calc(100vw - 158px)) !important;
+  max-height: calc(100vh - 112px) !important;
+  overflow: auto !important;
+  padding: 12px !important;
+  margin: 0 !important;
+  background:
+    linear-gradient(180deg, rgba(24,34,46,0.96), rgba(13,18,25,0.96)),
+    radial-gradient(circle at 80% 0%, rgba(121,174,242,0.09), transparent 48%) !important;
+  border: 1px solid var(--yrp-border-strong) !important;
+  border-radius: 18px !important;
+  box-shadow: var(--yrp-shadow) !important;
+  backdrop-filter: blur(14px) !important;
+  scrollbar-width: thin !important;
+}
+
+#ui .menuPanel.active {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  align-content: start !important;
+  gap: 10px !important;
+}
+
+#ui #panelGuide.active,
+#ui #panelRoutes.active,
+#ui #panelEmpires.active {
+  width: min(570px, calc(100vw - 158px)) !important;
+}
+
+.v19PanelClose {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 2 !important;
+  justify-self: end !important;
+  margin: -2px 0 0 auto !important;
+  width: auto !important;
+  min-height: 28px !important;
+  padding: 5px 9px !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,0.08) !important;
+  color: #dfeaf0 !important;
+}
+
+/* CARDS */
+#ui .smallPanel,
+.heroCard,
+.armyEditor {
+  margin: 0 !important;
+  background: var(--yrp-bg-card) !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  border-radius: 15px !important;
+  padding: 12px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04) !important;
+}
+
+#ui .smallPanel h2 {
+  margin: 0 0 9px !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  letter-spacing: 0.02em !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+#ui .smallPanel h2::before {
+  content: "";
+  width: 4px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--yrp-gold);
+  box-shadow: 0 0 14px rgba(215,182,106,0.38);
+}
+
+#ui .hint,
+#ui .subtleLine,
+.v18InspectorHint {
+  color: var(--yrp-muted) !important;
+  font-size: 12px !important;
+  line-height: 1.35 !important;
+}
+
+#ui input[type="text"],
+#ui input[type="number"],
+#ui select,
+#ui textarea {
+  background: rgba(5,10,15,0.58) !important;
+  color: var(--yrp-text) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  border-radius: 10px !important;
+  padding: 8px 9px !important;
+}
+
+#ui .row {
+  display: flex !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+}
+
+#ui ul {
+  padding-left: 18px !important;
+}
+
+.clickableListItem {
+  border-radius: 10px !important;
+  padding: 6px 7px !important;
+  margin: 3px 0 !important;
+}
+
+.clickableListItem:hover {
+  background: rgba(255,255,255,0.07) !important;
+}
+
+.empireColorDot {
+  display: inline-block !important;
+  width: 11px !important;
+  height: 11px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(255,255,255,0.75) !important;
+  vertical-align: -1px !important;
+  margin-right: 6px !important;
+}
+
+.v18EmptyNotice {
+  color: var(--yrp-muted) !important;
+  font-size: 12px !important;
+  padding: 9px !important;
+  border: 1px dashed rgba(255,255,255,0.14) !important;
+  border-radius: 12px !important;
+}
+
+.disabledEventCard {
+  opacity: 0.55 !important;
+  filter: grayscale(0.25) !important;
+}
+
+/* FLOATING GAME PANELS */
+#contextMenu,
+#battlePanel,
+.legend {
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  border-radius: 16px !important;
+  box-shadow: var(--yrp-shadow) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+.legend {
+  right: 18px !important;
+  bottom: 18px !important;
+  background: rgba(13,18,25,0.88) !important;
+}
+
+/* Hide panel state */
+body.v19-map-only #ui .menuPanel.active {
+  display: none !important;
+}
+
+body.v19-map-only #ui .menuTabs button.active {
+  background: linear-gradient(180deg, rgba(48,67,84,0.96), rgba(30,42,54,0.96)) !important;
+  color: var(--yrp-text) !important;
+  border-color: rgba(255,255,255,0.15) !important;
+}
+
+body.v19-map-only #v19MapOnlyBtn {
+  border-color: rgba(215,182,106,0.68) !important;
+  background: linear-gradient(180deg, rgba(101,84,42,0.72), rgba(55,47,31,0.88)) !important;
+  color: #fff4cc !important;
+}
+
+canvas {
+  cursor: grab;
+}
+
+canvas:active {
+  cursor: grabbing;
+}
+
+@media (max-width: 900px) {
+  #ui .topBar {
+    left: 10px !important;
+    right: 10px !important;
+    transform: none !important;
+    width: auto !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  #ui .modeActions,
+  #ui .topActions {
+    justify-content: flex-start !important;
+  }
+
+  #readout {
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  #ui .menuTabs {
+    top: 194px !important;
+    left: 10px !important;
+    width: 96px !important;
+  }
+
+  #ui .menuPanel,
+  #ui #panelGuide.active,
+  #ui #panelRoutes.active,
+  #ui #panelEmpires.active {
+    top: 194px !important;
+    right: 10px !important;
+    width: calc(100vw - 128px) !important;
+    max-height: calc(100vh - 210px) !important;
+  }
+}
